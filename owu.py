@@ -19,7 +19,7 @@ def show_loading(title, message):
     return loading_window
 
 def on_clicked_about(icon, item):
-    show_alert("About", f"OllamaWebUI v1.0.0")
+    show_alert("About", f"OllamaWebUI v1.0.1")
 
 def on_clicked_update(icon, item):
     """Check if 'open-webui' has an update available."""
@@ -47,9 +47,12 @@ def on_clicked_update(icon, item):
 
 def run_open_webui():
     """Run open-webui serve in the background."""
+    loading_window = show_loading("Starting..", "Opening Open-webui...")
     logging.info("Starting open-webui server...")
     subprocess.Popen(['open-webui', 'serve'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    
+    logging.info("Open-webui Started.")
+    loading_window.destroy()
+
 def show_alert(title, message):
     """Show an alert message box and properly close it when clicking OK."""
     root = tk.Tk()
